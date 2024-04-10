@@ -4,6 +4,7 @@ class FibonacciSeries {
     }
     calculateFibonacciValue(number) {
         var s = 0;
+        var returnValue;
 
         if (number == 0) {
             return (s);
