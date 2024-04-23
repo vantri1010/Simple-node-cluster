@@ -1,0 +1,12 @@
+npm install -g loadtest
+loadtest -n 1000 -c 100 --rps 200 http://localhost:3000?number=24
+
+npm install -g artillery
+artillery quick --count 10 -n 20 http://localhost:3000?number=20
+
+npm install -g pm2
+pm2 start ecosystem.config.js
+pm2 monit
+pm2 list
+pm2 stop all
+pm2 delete all
