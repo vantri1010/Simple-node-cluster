@@ -1,6 +1,6 @@
-const rq = require("amqplib/callback_api");
+const rq = require("amqplib");
 
-rq.connect("amqp://localhost", (err, connection) => {
+rq.connect("amqp://192.168.1.4:5672", (err, connection) => {
     if (err) { process.exit(); }
     else {
         const queueName = "FabSeries1";

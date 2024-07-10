@@ -1,10 +1,10 @@
-const rq = require("amqplib/callback_api");
+const rq = require("amqplib");
 
 const fabObj = require("../math-logic/fibonacci-series");
 
 
 function sendValueInFabQueue1(num) {
-    rq.connect("amqp://localhost", (err, connection) => {
+    rq.connect("amqp://192.168.1.4:5672", (err, connection) => {
         if (err) process.exit();
         const queueName = "FabSeries1";
         connection.createChannel((error, channel) => {
