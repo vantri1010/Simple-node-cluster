@@ -1,15 +1,22 @@
-const rq = require("amqplib");
+const amqp = require("amqplib");
 
-rq.connect("amqp://192.168.1.4:5672", (err, connection) => {
-    if (err) { process.exit(); }
-    else {
+async function consumeMessages() {
+    try {
+        const connection = await amqp.connect("amqp://192.168.1.4:5672");
+        const channel = await connection.createChannel();
+
         const queueName = "FabSeries2";
-        connection.createChannel((err, channel) => {
-            channel.assertQueue(queueName, { durable: false });
-            channel.consume(queueName, message => {
-                console.log(`Waiting for messages`);
-                console.log(`${queueName} - ${message.content.toString()}`);
-            }, { noAck: true });
-        });
+
+        await channel.assertQueue(queueName, { durable: false });
+        await channel.consume(queueName, message => {
+            console.log(`Received message: ${message.content.toString()}`);
+        }, { noAck: true });
+
+        console.log(`Waiting for messages in queue ${queueName}`);
+    } catch (error) {
+        console.error("Error:", error);
+        process.exit(1);
     }
-});
+}
+
+consumeMessages();
