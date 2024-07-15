@@ -2,7 +2,7 @@ const amqp = require("amqplib");
 
 async function consumeMessages() {
     try {
-        const connection = await amqp.connect("amqp://192.168.1.4:5672");
+        const connection = await amqp.connect("amqp://127.0.0.1:5672");
         const channel = await connection.createChannel();
 
         const queueName = "FabSeries1";
