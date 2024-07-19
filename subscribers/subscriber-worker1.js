@@ -12,5 +12,5 @@ subscriber.subscribe("math-subscription1");
 
 subscriber.on("message", (channel, message) => {
     let seriesValue = fibonacciSeriesObj.calculateFibonacciValue(Number.parseInt(message));
-    console.log(`Fibonacci series value is ${seriesValue}`);
+    console.log(`Fibonacci series value of ${message} is ${seriesValue}`);
 });
